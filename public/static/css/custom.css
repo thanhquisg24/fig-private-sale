@@ -1,0 +1,17 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+.login-box {
+  padding: 9% 0 0;
+  height: 100%;
+  background: #007bff;
+  background: linear-gradient(to right, #0062e6, #33aeff);
+}
