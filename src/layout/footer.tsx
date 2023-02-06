@@ -2,7 +2,7 @@
 export default function Footer() {
   return (
     <footer id="footer" className="footer">
-      <div className="footer-newsletter">
+      {/* <div className="footer-newsletter">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-12 text-center">
@@ -17,7 +17,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="footer-top">
         <div className="container">
           <div className="row gy-4">
