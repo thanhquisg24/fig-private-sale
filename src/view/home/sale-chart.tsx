@@ -22,7 +22,7 @@ export const options = {
   },
 };
 
-const labels = ["", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5"];
+const labels = ["", "Month 1", "Month 2", "Month 3", "Month 4", "Month 5"];
 
 export const data = {
   labels,
