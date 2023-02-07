@@ -1,8 +1,10 @@
-import { IJwtEntity } from "@adapters/entity";
-import { setAxiosHeaderAuth } from "@adapters/infrastructures/axios/customeAxios";
-import { IAuthRepository } from "@adapters/repositories/auth-repository";
+import { IJwtEntity, ILoginResponse } from "@adapters/entity";
+
 import { AxiosResponse } from "axios";
+import { IAuthRepository } from "@adapters/repositories/auth-repository";
 import { diInfrastructures } from "../di";
+import { getApiCatchErr } from "@adapters/utils";
+import { setAxiosHeaderAuth } from "@adapters/infrastructures/axios/customeAxios";
 
 export interface IAuthUseCase {
   postLogin(email: string, password: string): Promise<IJwtEntity>;
@@ -30,10 +32,10 @@ export class AuthUseCase implements IAuthUseCase {
         .then((res: AxiosResponse) => {
           if (res.status === 200) {
             // const { data } = res;
-            const user: IJwtEntity = store;
-            resolve(user);
+            const jwt: IJwtEntity = store;
+            resolve(jwt);
           }
-          reject(new Error(`CheckToken Error HTTP status code ${res.status}`));
+          reject(new Error(res.data.message));
         })
         .catch((error) => reject(error));
     });
@@ -51,16 +53,19 @@ export class AuthUseCase implements IAuthUseCase {
     return new Promise((resolve, reject) => {
       this.repository
         .postLogin(email, password)
-        .then((res: AxiosResponse) => {
+        .then((res: AxiosResponse<ILoginResponse>) => {
           if (res.status === 200) {
-            const { data } = res;
-            const newJwt = this.storeAuth(data.token, data.refreshToken, data.email);
-            setAxiosHeaderAuth(data.token);
+            const { resultData } = res.data;
+            const newJwt = this.storeAuth(resultData.access_token, resultData.refresh_token, "");
+            setAxiosHeaderAuth(resultData.access_token);
             resolve(newJwt);
+          } else {
+            reject(new Error(res.data.message));
           }
-          reject(new Error(`Login Error HTTP status code ${res.status}`));
         })
-        .catch((error) => reject(error));
+        .catch((error) => {
+          return reject(getApiCatchErr(error));
+        });
     });
   }
 
@@ -74,7 +79,7 @@ export class AuthUseCase implements IAuthUseCase {
             setAxiosHeaderAuth("");
             resolve("Logout Success!");
           }
-          reject(new Error(`Logout Error HTTP status code ${res.status}`));
+          reject(new Error(res.data.message));
         })
         .catch((error) => reject(error));
     });
@@ -86,12 +91,12 @@ export class AuthUseCase implements IAuthUseCase {
         .postRefreshToken(refreshToken)
         .then((res: AxiosResponse) => {
           if (res.status === 200) {
-            const { data } = res;
-            const newJwt = diInfrastructures.webStorage.setToken(data.accessToken, data.refreshToken);
-            setAxiosHeaderAuth(data.accessToken);
+            const { resultData } = res.data;
+            const newJwt = diInfrastructures.webStorage.setToken(resultData.access_token, resultData.refresh_token);
+            setAxiosHeaderAuth(resultData.accessToken);
             resolve(newJwt);
           }
-          reject(new Error(`RefreshToken Error HTTP status code ${res.status}`));
+          reject(new Error(res.data.message));
         })
         .catch((error) => reject(error));
     });

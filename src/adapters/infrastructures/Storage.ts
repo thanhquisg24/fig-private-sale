@@ -1,7 +1,7 @@
-import { IJwtEntity, IUserEntity } from "@adapters/entity";
+import { IJwtEntity } from "@adapters/entity";
 import { JWT_TOKEN_EXPIREIN } from "./adapters.infrastructures.config";
 
-const TOKEN_STORAGE_NAME = "almJwtToken";
+const TOKEN_STORAGE_NAME = "jwtFig";
 export interface IWebStorage {
   getToken(): IJwtEntity | null;
   addToken(token: string, refreshToken: string, email: string): any;
@@ -18,8 +18,8 @@ class WebStorage implements IWebStorage {
 
   getToken(): IJwtEntity | null {
     const strt = this.storage.getItem(TOKEN_STORAGE_NAME);
-    const almJwtToken = strt ? JSON.parse(strt) : null;
-    return almJwtToken;
+    const jwtTokenStore = strt ? JSON.parse(strt) : null;
+    return jwtTokenStore;
   }
 
   addToken(token: string, refreshToken: string, email?: string): any {
@@ -29,7 +29,7 @@ class WebStorage implements IWebStorage {
       type: "Bearer ",
       refresh_token: refreshToken,
       expiresIn: JWT_TOKEN_EXPIREIN,
-      createdAt: currentTimestamp,
+      tokenCreatedAt: currentTimestamp,
     };
     this.storage.setItem(TOKEN_STORAGE_NAME, JSON.stringify(almJwtToken));
     return almJwtToken;
@@ -45,7 +45,7 @@ class WebStorage implements IWebStorage {
         type: "Bearer ",
         refresh_token: refreshToken,
         expiresIn: JWT_TOKEN_EXPIREIN,
-        createdAt: currentTimestamp,
+        tokenCreatedAt: currentTimestamp,
       };
       this.storage.setItem(TOKEN_STORAGE_NAME, JSON.stringify(almJwtToken));
       return almJwtToken;

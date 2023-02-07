@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-curly-newline */
-import { RootStateType } from "@store/types";
-import { Loading } from "@ui-component/SpinerWrapper";
-
-import { useAppSelector } from "@hooks/useReduxToolKit";
 import { Navigate, useLocation } from "react-router-dom";
+
+import { Loading } from "@components/SpinerWrapper";
+import { RootStateType } from "@store/types";
+import { useAppSelector } from "@hooks/useReduxToolKit";
 
 function RequireAuth({ children }: any) {
   const { authChecked, loggedIn, currentUser, isLoading } = useAppSelector((state: RootStateType) => state.auth);

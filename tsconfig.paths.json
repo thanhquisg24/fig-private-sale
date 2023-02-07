@@ -5,7 +5,7 @@
       "@menu-items/*": ["./src/menu-items/*"],
       "@store/*": ["./src/store/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@ui-component/*": ["./src/ui-component/*"],
+      "@components/*": ["./src/components/*"],
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
       "@adapters/*": ["./src/adapters/*"],

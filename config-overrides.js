@@ -14,7 +14,7 @@ module.exports = function override(config) {
       "@menu-items": path.resolve(__dirname, "src/menu-items"),
       "@store": path.resolve(__dirname, "src/store"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
-      "@ui-component": path.resolve(__dirname, "src/ui-component"),
+      "@components": path.resolve(__dirname, "src/components"),
       "@utils": path.resolve(__dirname, "src/utils"),
       "@assets": path.resolve(__dirname, "src/assets"),
       "@adapters": path.resolve(__dirname, "src/adapters"),
@@ -34,7 +34,7 @@ module.exports = function override(config) {
 //     // ...add your webpack config
 //     alias: {
 //       '@': path.resolve(__dirname, 'src/'),
-//       '@Components': path.resolve(__dirname, 'src/components'),
+//       '@componentss': path.resolve(__dirname, 'src/components'),
 //       '@So_on': path.resolve(__dirname, 'src/so_on'),
 //     }
 //     return config;

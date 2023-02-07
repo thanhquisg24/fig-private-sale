@@ -26,3 +26,5 @@ export function getFilterForRest(arr: ITableFilter[]): { [x: string]: any } {
   }, {});
   return reduceObj;
 }
+
+export * from "./notifyToast";

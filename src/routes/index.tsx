@@ -1,24 +1,11 @@
-import { createBrowserRouter } from "react-router-dom";
-import config from "../config";
-import ErrorPage from "../view/error";
-import HomeView from "../view/home";
-import LoginView from "../view/login";
+import AuthenticationRoutes from "./AuthenticationRoutes";
+import MainRoutes from "./MainRoutes";
+import { useRoutes } from "react-router-dom";
 
-export const routerConfig = createBrowserRouter(
-  [
-    {
-      path: "/",
-      index: true,
-      element: <HomeView />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "login",
-      element: <LoginView />,
-      errorElement: <ErrorPage />,
-    },
-  ],
-  {
-    basename: config.basename,
-  },
-);
+// export const routerConfig = createBrowserRouter([...AuthenticationRoutes, ...MainRoutes], {
+//   basename: config.basename,
+// });
+
+export default function ThemeRoutes() {
+  return useRoutes([...MainRoutes, ...AuthenticationRoutes]);
+}
