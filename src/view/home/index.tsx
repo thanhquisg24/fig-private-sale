@@ -9,7 +9,6 @@ export default function HomeView() {
   return (
     <>
       <Header />
-
       <main id="main">
         {/* ======= Breadcrumbs ======= */}
         <section className="breadcrumbs pt-4">

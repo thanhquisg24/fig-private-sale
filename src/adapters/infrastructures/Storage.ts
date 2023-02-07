@@ -4,8 +4,8 @@ import { JWT_TOKEN_EXPIREIN } from "./adapters.infrastructures.config";
 const TOKEN_STORAGE_NAME = "jwtFig";
 export interface IWebStorage {
   getToken(): IJwtEntity | null;
-  addToken(token: string, refreshToken: string, email: string): any;
-  setToken(token: string, refreshToken: string): any;
+  addToken(token: string, refreshToken: string, email: string, userId: number): any;
+  setToken(token: string, refreshToken: string, email: string, userId: number): any;
   removeToken(): void;
 }
 
@@ -22,9 +22,11 @@ class WebStorage implements IWebStorage {
     return jwtTokenStore;
   }
 
-  addToken(token: string, refreshToken: string, email?: string): any {
+  addToken(token: string, refreshToken: string, email: string, userId: number): any {
     const currentTimestamp = Date.now();
     const almJwtToken: IJwtEntity = {
+      email,
+      userId,
       access_token: token,
       type: "Bearer ",
       refresh_token: refreshToken,
@@ -36,11 +38,13 @@ class WebStorage implements IWebStorage {
   }
 
   // eslint-disable-next-line consistent-return
-  setToken(token: string, refreshToken: string): any {
+  setToken(token: string, refreshToken: string, email: string, userId: number): any {
     const o = this.getToken();
     if (o !== null) {
       const currentTimestamp = Date.now();
       const almJwtToken: IJwtEntity = {
+        email,
+        userId,
         access_token: token,
         type: "Bearer ",
         refresh_token: refreshToken,

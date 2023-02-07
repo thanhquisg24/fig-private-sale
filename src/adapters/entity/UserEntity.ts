@@ -4,10 +4,10 @@ export interface IUserEntity {
   id: number;
   email: string;
   price: number;
-  totalAmount: string;
-  locked: string;
-  avaiable: string;
-  claimed: string;
+  totalAmount: number;
+  locked: number;
+  avaiable: number;
+  claimed: number;
   startDate: Date;
   endDate: Date;
   vestingLogic: string;

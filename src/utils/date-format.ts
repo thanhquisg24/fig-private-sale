@@ -28,3 +28,13 @@ export function getDate(): Date {
   const d = moment().toDate();
   return d;
 }
+
+export function formatStandartDate(dateISO: string | Date) {
+  const m = moment(dateISO);
+  return m.format("MMM-MM-YYYY");
+}
+
+export function formatTxDate(dateISO: string | Date) {
+  const m = moment(dateISO);
+  return m.format("MMM-MM-YYYY HH:mm:ss A Z");
+}

@@ -28,3 +28,4 @@ export function getFilterForRest(arr: ITableFilter[]): { [x: string]: any } {
 }
 
 export * from "./notifyToast";
+export * from "./text-format";

@@ -47,14 +47,12 @@ function* loginSaga(action: ReturnType<typeof doLoginRequest>): Generator | any 
   try {
     // yield delay(1000);
     const resData: IJwtEntity = yield presenter.auth.postLogin(action.payload.email, action.payload.password);
-    console.log("🚀 ~ file: auth-saga.ts:50 ~ function*loginSaga ~ resData", resData);
     yield put(doLoginSuccess({ ...resData, email: action.payload.email }));
-    // yield spawn(timer, resData.expiresIn);
+    yield spawn(timer, resData.expiresIn);
     // yield delay(1000 * 60 * 5); //interval refresh 25 minute
     // yield put(doRefreshTokenRequest(resData.refreshToken));
   } catch (error) {
     // throw new Error(error);
-    console.log("🚀 ~ file: auth-saga.ts:55 ~ function*loginSaga ~ error", error);
     yield put(doLoginFailure("Email or password is incorrect!"));
     notifyMessageError("Email or password is incorrect!");
   }

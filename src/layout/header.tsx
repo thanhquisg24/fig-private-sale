@@ -1,26 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import { useAppDispatch, useAppSelector } from "@hooks/useReduxToolKit";
+import { doLogoutRequest } from "@store/actions";
+import { getUserSelector } from "@store/selector";
 
 export default function Header() {
+  const dispatch = useAppDispatch();
+  const { userData } = useAppSelector(getUserSelector);
+  const handleLogout = async () => {
+    // console.log("Logout");
+    dispatch(doLogoutRequest());
+  };
   return (
     <header id="header" className="header fixed-top header-scrolled">
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="index.html" className="logo d-flex align-items-center">
           <img src="/static/img/logo.png" alt="" />
-          <span>FlexStart</span>
+          <span>FIG</span>
         </a>
         <nav id="navbar" className="navbar">
           <ul>
-            <li className="dropdown user-info-li">
-              <a href="#">
-                <span>welcome, example@gmail.com</span> <i className="bi bi-chevron-down" />
-              </a>
-              <ul>
-                <li>
-                  <a href="#">Logout</a>
-                </li>
-              </ul>
-            </li>
+            {userData && (
+              <li className="dropdown user-info-li">
+                <a href="#">
+                  <span>hello, {userData.email}</span> <i className="bi bi-chevron-down" />
+                </a>
+                <ul>
+                  <li>
+                    <a href="#" onClick={handleLogout}>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            )}
 
             <li>
               <b className="btn-connect-wallet getstarted scrollto">Connect Wallet</b>

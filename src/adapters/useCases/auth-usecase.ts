@@ -41,8 +41,8 @@ export class AuthUseCase implements IAuthUseCase {
     });
   }
 
-  private storeAuth(token: string, refreshToken: string, email: string): any {
-    return diInfrastructures.webStorage.addToken(token, refreshToken, email);
+  private storeAuth(token: string, refreshToken: string, email: string, userId: number): any {
+    return diInfrastructures.webStorage.addToken(token, refreshToken, email, userId);
   }
 
   private removeAuth(): void {
@@ -56,7 +56,7 @@ export class AuthUseCase implements IAuthUseCase {
         .then((res: AxiosResponse<ILoginResponse>) => {
           if (res.status === 200) {
             const { resultData } = res.data;
-            const newJwt = this.storeAuth(resultData.access_token, resultData.refresh_token, "");
+            const newJwt = this.storeAuth(resultData.access_token, resultData.refresh_token, resultData.email, resultData.userId);
             setAxiosHeaderAuth(resultData.access_token);
             resolve(newJwt);
           } else {
@@ -92,7 +92,7 @@ export class AuthUseCase implements IAuthUseCase {
         .then((res: AxiosResponse) => {
           if (res.status === 200) {
             const { resultData } = res.data;
-            const newJwt = diInfrastructures.webStorage.setToken(resultData.access_token, resultData.refresh_token);
+            const newJwt = diInfrastructures.webStorage.setToken(resultData.access_token, resultData.refresh_token, resultData.email, resultData.userId);
             setAxiosHeaderAuth(resultData.accessToken);
             resolve(newJwt);
           }
