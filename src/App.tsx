@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { DAppProvider } from "@usedapp/core";
 import { Provider } from "react-redux";
 import React from "react";
 import Routes from "./routes";
@@ -9,11 +10,13 @@ import { store } from "./store";
 store.dispatch(appInitAction());
 function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter basename={config.basename}>
-        <Routes />
-      </BrowserRouter>
-    </Provider>
+    <DAppProvider config={config.chainConfig}>
+      <Provider store={store}>
+        <BrowserRouter basename={config.basename}>
+          <Routes />
+        </BrowserRouter>
+      </Provider>
+    </DAppProvider>
   );
 }
 
