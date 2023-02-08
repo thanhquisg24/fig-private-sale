@@ -3,6 +3,10 @@ body,
 #root {
   height: 100%;
 }
+body,
+#header {
+  padding-right: 0 !important;
+}
 
 .btn-login {
   font-size: 0.9rem;

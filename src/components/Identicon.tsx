@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 
-import Jazzicon from "@metamask/jazzicon";
 import styled from "@emotion/styled";
 import { useEthers } from "@usedapp/core";
 
@@ -8,10 +7,11 @@ const StyledIdenticon = styled.div`
   height: 1rem;
   width: 1rem;
   border-radius: 1.125rem;
-  background-color: black;
 `;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Jazzicon = require("@metamask/jazzicon");
 
-export default function Identicon() {
+export default function Identicon(props: any) {
   const ref = useRef<HTMLDivElement>();
   const { account } = useEthers();
 
@@ -22,5 +22,5 @@ export default function Identicon() {
     }
   }, [account]);
 
-  return <StyledIdenticon ref={ref as any} />;
+  return <StyledIdenticon ref={ref as any} {...props} />;
 }

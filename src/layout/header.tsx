@@ -2,6 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@hooks/useReduxToolKit";
 import { doLogoutRequest } from "@store/actions";
 import { getUserSelector } from "@store/selector";
+import ConnectWalletContainer from "./ConnectWalletContainer";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ export default function Header() {
             )}
 
             <li>
-              <b className="btn-connect-wallet getstarted scrollto">Connect Wallet</b>
+              <ConnectWalletContainer />
             </li>
           </ul>
           <i className="bi bi-list mobile-nav-toggle" />
