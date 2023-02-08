@@ -47,8 +47,8 @@ export default function LoginView() {
                 <h5 className="card-title text-center mb-4 fw-light fs-5">Sign In</h5>
                 <Formik
                   initialValues={{
-                    email: "cliff",
-                    password: "esca888",
+                    email: "demoinfo@gmail.com",
+                    password: "123456",
                     submit: null,
                   }}
                   validationSchema={Yup.object().shape({
