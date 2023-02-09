@@ -1,4 +1,4 @@
-import { useEthers } from "@usedapp/core";
+import { shortenIfAddress, useEthers } from "@usedapp/core";
 
 import { Button } from "react-bootstrap";
 import Identicon from "./Identicon";
@@ -17,9 +17,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   return account ? (
     <Button className="btn-connect-wallet getstarted scrollto d-inline-flex" onClick={handleOpenModal}>
       <Identicon />
-      <span className="text-white mx-2">
-        {account && `${account.slice(0, 6)}...${account.slice(account.length - 4, account.length)}`}
-      </span>
+      <span className="text-white mx-2">{shortenIfAddress(account)}</span>
     </Button>
   ) : (
     <Button onClick={() => handleConnectWallet()} className="btn-connect-wallet getstarted scrollto">

@@ -1,22 +1,33 @@
 import { Button, Modal } from "react-bootstrap";
+import { shortenIfAddress, useEthers } from "@usedapp/core";
 
-import Identicon from "./Identicon";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { FIG_CHAIN } from "src/config";
+import Identicon from "./Identicon";
 
-import { useEthers } from "@usedapp/core";
+// import { formatUnits } from "ethers/lib/utils";
 
 type Props = {
   isOpen: any;
   onClose: any;
 };
+// const FIG_ADDRESS = "0x3AA56A9c28b77223709d040e32B74694f6381847";
 
 export default function AccountModal({ isOpen, onClose }: Props) {
   const { account, deactivate } = useEthers();
+  // const daiBalance = useTokenBalance(FIG_ADDRESS, account);
 
   function handleDeactivateAccount() {
     deactivate();
     onClose();
   }
+  const viewExplorer = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (account) {
+      const url = FIG_CHAIN.getExplorerAddressLink(account);
+      window.open(url, "_blank");
+    }
+  };
 
   return (
     <Modal show={isOpen} onHide={onClose}>
@@ -34,9 +45,8 @@ export default function AccountModal({ isOpen, onClose }: Props) {
 
         <div className="d-flex flex-row p-2">
           <Identicon />
-          <span className="ms-2">
-            {account && `${account.slice(0, 6)}...${account.slice(account.length - 4, account.length)}`}
-          </span>
+          <span className="ms-2">{shortenIfAddress(account)}</span>
+          {/* {daiBalance && <p>FIG balance:{formatUnits(daiBalance, 18)} </p>} */}
         </div>
 
         <div className="d-flex flex-row p-2">
@@ -45,7 +55,7 @@ export default function AccountModal({ isOpen, onClose }: Props) {
               <i className="fa-solid fa-copy fa-lg"></i> Copy Address
             </Button>
           </CopyToClipboard>
-          <Button variant="link">
+          <Button variant="link" onClick={(e) => viewExplorer(e)}>
             <i className="fa-solid fa-arrow-up-right-from-square fa-lg"></i> View on Explorer
           </Button>
         </div>

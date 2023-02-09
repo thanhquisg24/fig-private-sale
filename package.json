@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/styled": "^11.10.5",
     "@ethersproject/units": "^5.7.0",
+    "@metamask/detect-provider": "^2.0.0",
     "@metamask/jazzicon": "^2.0.0",
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
