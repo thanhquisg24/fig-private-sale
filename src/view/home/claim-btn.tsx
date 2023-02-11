@@ -34,12 +34,10 @@ export default function ClaimBtn(props: { userId: number; avaiableAmount: number
         userId,
         userAddress: account,
       };
-      updateSubmitState(false);
 
       presenter.user
         .postUserClaimToken(payload)
         .then((result) => {
-          console.log("🚀 ~ file: claim-btn.tsx:44 ~ .then ~ result", result);
           notifyMessageSuccess(result.tx);
           updateSubmitState(false);
           const userAction = getInfoRequest(userId);
