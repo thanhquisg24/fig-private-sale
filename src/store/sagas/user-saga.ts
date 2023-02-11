@@ -7,7 +7,7 @@ import { notifyMessageError } from "@emiter/AppEmitter";
 import { doLoginSuccess } from "@store/actions";
 import { getInfoFailure, getInfoSuccess, getInfoRequest } from "@store/actions/user-action";
 
-function* getUserSaga(action: ReturnType<typeof doLoginSuccess>): Generator | any {
+function* getUserLoginSaga(action: ReturnType<typeof doLoginSuccess>): Generator | any {
   try {
     const { userId } = action.payload;
     yield put(getInfoRequest(userId));
@@ -19,8 +19,23 @@ function* getUserSaga(action: ReturnType<typeof doLoginSuccess>): Generator | an
   }
 }
 
-function* getUserSagaWatcher() {
-  yield takeLatest(doLoginSuccess.type, getUserSaga);
+function* getUserLoginSagaWatcher() {
+  yield takeLatest(doLoginSuccess.type, getUserLoginSaga);
 }
 
-export const userWatchers = [getUserSagaWatcher()];
+function* getUserRequestSaga(action: ReturnType<typeof getInfoRequest>): Generator | any {
+  try {
+    const userId = action.payload;
+    const resData: IUserEntity = yield presenter.user.getUserInfo(userId);
+    yield put(getInfoSuccess(resData));
+  } catch (error) {
+    yield put(getInfoFailure("Fetch User Info Fail!"));
+    notifyMessageError("Fetch User Info Fail!");
+  }
+}
+
+function* getUserRequestSagaWatcher() {
+  yield takeLatest(getInfoRequest.type, getUserRequestSaga);
+}
+
+export const userWatchers = [getUserLoginSagaWatcher(), getUserRequestSagaWatcher()];

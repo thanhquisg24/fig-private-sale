@@ -63,9 +63,9 @@ export const emitRefreshUnMatchWager = (): void => {
   AppEmitter.emit(REFRESH_UNMATCH_WAGER);
 };
 
-export const REFRESH_GAMES = "REFRESH_GAMES";
-export const emitRefreshGames = (): void => {
-  AppEmitter.emit(REFRESH_GAMES);
+export const REFRESH_DATA = "REFRESH_DATA";
+export const emitRefreshData = (): void => {
+  AppEmitter.emit(REFRESH_DATA);
 };
 
 export const TOGGLE_SPORT_MOBILE_MENU = "TOGGLE_SPORT_MOBILE_MENU";

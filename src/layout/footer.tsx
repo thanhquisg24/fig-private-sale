@@ -26,7 +26,10 @@ export default function Footer() {
                 <img src="assets/img/logo.png" alt="" />
                 <span>FlexStart</span>
               </a>
-              <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+              <p>
+                Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+                darta donna mare fermentum iaculis eu non diam phasellus.
+              </p>
               <div className="social-links mt-3">
                 <a href="#" className="twitter">
                   <i className="bi bi-twitter" />
@@ -103,16 +106,12 @@ export default function Footer() {
         <div className="copyright">
           © Copyright{" "}
           <strong>
-            <span>FlexStart</span>
+            <span>Figchain</span>
           </strong>
           . All Rights Reserved
         </div>
         <div className="credits">
-          {/* All the links in the footer should remain intact. */}
-          {/* You can delete the links only if you purchased the pro version. */}
-          {/* Licensing information: https://bootstrapmade.com/license/ */}
-          {/* Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ */}
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Designed by <a href="https://docs.figchain.org/">Figchain</a>
         </div>
       </div>
     </footer>

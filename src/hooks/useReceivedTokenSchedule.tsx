@@ -1,30 +1,30 @@
-import { IVestingHistoryEntity } from "@adapters/entity/VestingHistoryEntity";
+import { IReceivedTokenScheduleEntity } from "@adapters/entity/ReceivedTokenScheduleEntity";
 import { AppEmitter, REFRESH_DATA } from "@emiter/AppEmitter";
 import React from "react";
 import { presenter } from "../adapters/presenters/index";
 
-interface IVestingHistoryResult {
-  historyData: IVestingHistoryEntity[];
+interface ITokenScheduleResult {
+  scheduleData: IReceivedTokenScheduleEntity[];
   isLoading: boolean;
 }
 
-export function useVestingHistory(userId: number | null): IVestingHistoryResult {
-  const [state, setState] = React.useState<IVestingHistoryResult>({
-    historyData: [],
+export function useVestingHistory(userId: number | null): ITokenScheduleResult {
+  const [state, setState] = React.useState<ITokenScheduleResult>({
+    scheduleData: [],
     isLoading: false,
   });
-  const updateHistory = React.useCallback((_userId: number) => {
-    presenter.vestingHistory
-      .getVestingHistoryInfo(_userId)
+  const updateSchedules = React.useCallback((_userId: number) => {
+    presenter.tokenSchedule
+      .getSchedules(_userId)
       .then((result) => {
         setState({
-          historyData: result,
+          scheduleData: result,
           isLoading: false,
         });
       })
       .catch(() => {
         setState({
-          historyData: [],
+          scheduleData: [],
           isLoading: false,
         });
       });
@@ -32,14 +32,14 @@ export function useVestingHistory(userId: number | null): IVestingHistoryResult 
   React.useEffect(() => {
     if (userId !== null) {
       setState({
-        historyData: [],
+        scheduleData: [],
         isLoading: true,
       });
-      updateHistory(userId);
+      updateSchedules(userId);
     }
     return () => {
       setState({
-        historyData: [],
+        scheduleData: [],
         isLoading: false,
       });
     };
@@ -48,7 +48,7 @@ export function useVestingHistory(userId: number | null): IVestingHistoryResult 
   React.useEffect(() => {
     const listenner = () => {
       if (userId) {
-        updateHistory(userId);
+        updateSchedules(userId);
       }
     };
     AppEmitter.on(REFRESH_DATA, listenner);

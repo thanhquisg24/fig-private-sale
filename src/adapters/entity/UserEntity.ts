@@ -17,3 +17,9 @@ export interface IUserEntity {
 }
 
 export type IUserResponse = IResponseBag<IUserEntity>;
+
+export interface ITxClaimToken {
+  tx: string;
+}
+
+export type ITxClaimTokenResponse = IResponseBag<ITxClaimToken>;

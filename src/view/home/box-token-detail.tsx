@@ -3,6 +3,7 @@ import { useAppSelector } from "@hooks/useReduxToolKit";
 import { getTokenSelector, getUserSelector } from "@store/selector";
 import { formatStandartDate } from "@utils/date-format";
 import { formatShortTx } from "@utils/text-format";
+import ClaimBtn from "./claim-btn";
 
 export default function BoxTokenDetail() {
   const userInfo = useAppSelector(getUserSelector);
@@ -71,9 +72,7 @@ export default function BoxTokenDetail() {
         </li>
       </ul>
 
-      <button type="button" className="btn btn-primary w-100 mt-4">
-        Claim
-      </button>
+      {userData && <ClaimBtn userId={userData.id} avaiableAmount={userData.avaiable} />}
     </div>
   );
 }
