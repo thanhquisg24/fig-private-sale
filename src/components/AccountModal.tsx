@@ -2,7 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import { shortenIfAddress, useEthers } from "@usedapp/core";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { FIG_CHAIN } from "src/config";
+import { FIG_CHAIN } from "../config";
 import Identicon from "./Identicon";
 
 // import { formatUnits } from "ethers/lib/utils";

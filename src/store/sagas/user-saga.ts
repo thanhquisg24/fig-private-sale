@@ -11,8 +11,8 @@ function* getUserLoginSaga(action: ReturnType<typeof doLoginSuccess>): Generator
   try {
     const { userId } = action.payload;
     yield put(getInfoRequest(userId));
-    const resData: IUserEntity = yield presenter.user.getUserInfo(userId);
-    yield put(getInfoSuccess(resData));
+    // const resData: IUserEntity = yield presenter.user.getUserInfo(userId);
+    // yield put(getInfoSuccess(resData));
   } catch (error) {
     yield put(getInfoFailure("Fetch User Info Fail!"));
     notifyMessageError("Fetch User Info Fail!");

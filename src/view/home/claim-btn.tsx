@@ -34,9 +34,12 @@ export default function ClaimBtn(props: { userId: number; avaiableAmount: number
         userId,
         userAddress: account,
       };
+      updateSubmitState(false);
+
       presenter.user
         .postUserClaimToken(payload)
         .then((result) => {
+          console.log("🚀 ~ file: claim-btn.tsx:44 ~ .then ~ result", result);
           notifyMessageSuccess(result.tx);
           updateSubmitState(false);
           const userAction = getInfoRequest(userId);
@@ -50,7 +53,7 @@ export default function ClaimBtn(props: { userId: number; avaiableAmount: number
     }
   };
 
-  return submitState ? (
+  return submitState.isSubmitting ? (
     <BtnSpinerSubmiting text="Claiming..." className="w-100 mt-4" variant="primary" />
   ) : (
     <button type="button" className="btn btn-primary w-100 mt-4" onClick={() => onHandleClaim()}>

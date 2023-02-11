@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 
 export const emitToastError = (errMsg: string | JSX.Element): void => {
   toast.error(errMsg, {
-    position: "top-left",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -12,7 +12,7 @@ export const emitToastError = (errMsg: string | JSX.Element): void => {
 };
 export const emitToastSuccess = (sucMessage: string | JSX.Element): void => {
   toast.success(sucMessage, {
-    position: "top-left",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -22,7 +22,7 @@ export const emitToastSuccess = (sucMessage: string | JSX.Element): void => {
 };
 export const emitToastDefault = (message: string | JSX.Element): void => {
   toast.info(message, {
-    position: "top-left",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,

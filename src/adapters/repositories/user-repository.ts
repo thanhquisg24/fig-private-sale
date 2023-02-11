@@ -9,7 +9,7 @@ export interface IUserRepository {
 
 export class UserRepository extends BaseRepository implements IUserRepository {
   postUserClaimToken(payload: IUserClaimTokenPayload): Promise<AxiosResponse> {
-    return this.AxiosIns.post("user", payload);
+    return this.AxiosIns.post("/user/claim-token", payload);
   }
 
   getUserInfo(userId: number): Promise<AxiosResponse> {
