@@ -1,15 +1,13 @@
 import MoneyComponent from "@components/MoneyComponent";
 import { useAppSelector } from "@hooks/useReduxToolKit";
-import { getTokenSelector, getUserSelector } from "@store/selector";
+import { getTokenInfoSelector, getUserInfoSelector } from "@store/selector";
 import { formatStandartDate } from "@utils/date-format";
 import { formatShortTx } from "@utils/text-format";
 import ClaimBtn from "./claim-btn";
 
 export default function BoxTokenDetail() {
-  const userInfo = useAppSelector(getUserSelector);
-  const { userData } = userInfo;
-  const tokenInfo = useAppSelector(getTokenSelector);
-  const { tokenInfoData } = tokenInfo;
+  const userData = useAppSelector(getUserInfoSelector);
+  const tokenInfoData = useAppSelector(getTokenInfoSelector);
   // const dispatch = useAppDispatch();
 
   return (
@@ -40,6 +38,15 @@ export default function BoxTokenDetail() {
               ) : (
                 "-----"
               )}
+            </span>
+          </div>
+        </li>
+        <li className="list-group-item">
+          <div className="d-flex justify-content-between">
+            <span className="s-title">Total</span>
+            <span className="s-content">
+              {userData ? <MoneyComponent numValue={userData.totalAmount} /> : "-----"}{" "}
+              {tokenInfoData ? tokenInfoData.tokenSymbol : "--"}
             </span>
           </div>
         </li>

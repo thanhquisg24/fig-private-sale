@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useAppDispatch, useAppSelector } from "@hooks/useReduxToolKit";
 import { doLogoutRequest } from "@store/actions";
-import { getUserSelector } from "@store/selector";
+import { getUserInfoSelector } from "@store/selector";
 import ConnectWalletContainer from "./ConnectWalletContainer";
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const { userData } = useAppSelector(getUserSelector);
+  const userData = useAppSelector(getUserInfoSelector);
   const handleLogout = async () => {
     // console.log("Logout");
     dispatch(doLogoutRequest());

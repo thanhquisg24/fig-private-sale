@@ -4,6 +4,7 @@ import { useVestingHistory } from "@hooks/useVestingHistory";
 import { getTokenSymbolSelector, getUserIdSelector } from "@store/selector";
 import { formatTxDate } from "@utils/date-format";
 import { formatShortTx } from "@utils/text-format";
+import { FIG_CHAIN } from "../../config";
 import { useAppSelector } from "../../hooks/useReduxToolKit";
 
 function HistoryTable(props: { data: IVestingHistoryEntity[]; tokenSymbol: string }) {
@@ -22,12 +23,24 @@ function HistoryTable(props: { data: IVestingHistoryEntity[]; tokenSymbol: strin
       <tbody>
         {data.map((item) => (
           <tr key={item.id}>
-            <td>{formatShortTx(item.txId)}</td>
+            <td>
+              <a href={FIG_CHAIN.getExplorerTransactionLink(item.txId)} target="_blank" rel="noreferrer">
+                {formatShortTx(item.txId)}
+              </a>
+            </td>
             <td>
               <MoneyComponent numValue={item.amount} /> {tokenSymbol}
             </td>
-            <td>{formatShortTx(item.fromAddress)}</td>
-            <td>{formatShortTx(item.toAddress)}</td>
+            <td>
+              <a href={FIG_CHAIN.getExplorerAddressLink(item.fromAddress)} target="_blank" rel="noreferrer">
+                {formatShortTx(item.fromAddress)}
+              </a>
+            </td>
+            <td>
+              <a href={FIG_CHAIN.getExplorerAddressLink(item.fromAddress)} target="_blank" rel="noreferrer">
+                {formatShortTx(item.toAddress)}
+              </a>
+            </td>
             <td>{formatTxDate(item.createdAt)}</td>
           </tr>
         ))}

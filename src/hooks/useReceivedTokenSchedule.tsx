@@ -8,7 +8,7 @@ interface ITokenScheduleResult {
   isLoading: boolean;
 }
 
-export function useVestingHistory(userId: number | null): ITokenScheduleResult {
+export function useTokenSchedules(userId: number | null): ITokenScheduleResult {
   const [state, setState] = React.useState<ITokenScheduleResult>({
     scheduleData: [],
     isLoading: false,
