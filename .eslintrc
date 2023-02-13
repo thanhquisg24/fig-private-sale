@@ -29,7 +29,7 @@
   "plugins": ["@typescript-eslint", "import"],
   "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended", "plugin:import/recommended"],
   "rules": {
-    "no-shadow":"off",
+    "no-shadow": "off",
     "no-confusing-arrow": "off",
     "eol-last": "off",
     "arrow-body-style": "off",
@@ -55,8 +55,6 @@
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["warn"],
     "@typescript-eslint/no-unused-expressions": ["warn"],
-    "no-shadow": "warn",
-
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-shadow": ["warn"],
     "no-param-reassign": [
