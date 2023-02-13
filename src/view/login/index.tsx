@@ -47,8 +47,8 @@ export default function LoginView() {
                 <h5 className="card-title text-center mb-4 fw-light fs-5">Sign In</h5>
                 <Formik
                   initialValues={{
-                    email: "demoinfo@gmail.com",
-                    password: "123456",
+                    email: "",
+                    password: "",
                     submit: null,
                   }}
                   validationSchema={Yup.object().shape({
@@ -60,15 +60,36 @@ export default function LoginView() {
                   {({ errors, handleBlur, handleChange, handleSubmit, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
                       <div className=" mb-3">
-                        <input onBlur={handleBlur} onChange={handleChange} value={values.email} type="email" name="email" className="form-control form-control-lg" placeholder="Email" />
+                        <input
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.email}
+                          type="email"
+                          name="email"
+                          className="form-control form-control-lg"
+                          placeholder="Email"
+                        />
                         {errors.email && <small className="text-danger form-text ">{errors.email}</small>}
                       </div>
                       <div className=" mb-3">
-                        <input onBlur={handleBlur} onChange={handleChange} value={values.password} name="password" type="password" className="form-control form-control-lg" placeholder="Password" />
+                        <input
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.password}
+                          name="password"
+                          type="password"
+                          className="form-control form-control-lg"
+                          placeholder="Password"
+                        />
                         {errors.password && <small className="text-danger form-text ">{errors.password}</small>}
                       </div>
                       <div className="d-grid">
-                        <Button disabled={isLoading} variant="primary" type="submit" className="btn-login text-uppercase fw-bold">
+                        <Button
+                          disabled={isLoading}
+                          variant="primary"
+                          type="submit"
+                          className="btn-login text-uppercase fw-bold"
+                        >
                           Sign in
                         </Button>
                       </div>

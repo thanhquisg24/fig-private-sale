@@ -1,20 +1,21 @@
-import { STATUS_ENUM } from "@adapters/entity/status-enum";
-import { useTokenSchedules } from "@hooks/useReceivedTokenSchedule";
-import { useAppSelector } from "@hooks/useReduxToolKit";
-import { getUserInfoSelector } from "@store/selector";
 import {
   CategoryScale,
   Chart as ChartJS,
   Legend,
-  LinearScale,
   LineElement,
+  LinearScale,
   PointElement,
   Title,
   Tooltip,
 } from "chart.js";
-import moment from "moment";
-import React from "react";
+
 import { Line } from "react-chartjs-2";
+import React from "react";
+import { STATUS_ENUM } from "@adapters/entity/status-enum";
+import { getUserInfoSelector } from "@store/selector";
+import moment from "moment";
+import { useAppSelector } from "@hooks/useReduxToolKit";
+import { useTokenSchedules } from "@hooks/useReceivedTokenSchedule";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -68,7 +69,6 @@ export function SaleChart() {
     const dataLocked: any = [];
     const releaseStep = userData ? userData.vestingLogic : "M";
     const releaseStepMask = releaseStep.slice(-1);
-    console.log("🚀 ~ file: sale-chart.tsx:108 ~ dataChart ~ rerender");
     if (shedules.scheduleData.length > 0) {
       let prevClaim = 0;
       let prevLock = 0;
@@ -108,9 +108,38 @@ export function SaleChart() {
         _labels.push(`${defaultEndMaskLabel} ${diffNum > 0 ? diffNum : 1}`);
       }
     }
-    const lineClaim = { ...claimLineTemplate, data: dataClaimed };
-    const lineLocked = { ...lockLineTemplate, data: dataLocked };
-    const newDataChart = { labels: _labels, datasets: [lineClaim, lineLocked] };
+
+    const isEmptyClaim = dataClaimed.reduce((store: boolean, cur: undefined | number) => {
+      if (cur && cur > 0) {
+        // eslint-disable-next-line no-param-reassign
+        store = false;
+      }
+      return store;
+    }, true);
+
+    const isEmptyLocked = dataLocked.reduce((store: boolean, cur: undefined | number) => {
+      if (cur && cur > 0) {
+        // eslint-disable-next-line no-param-reassign
+        store = false;
+      }
+      return store;
+    }, true);
+
+    let combinDataSet = [];
+    if (isEmptyClaim) {
+      dataLocked.unshift(0);
+      const lineLocked = { ...lockLineTemplate, data: dataLocked };
+      combinDataSet = [lineLocked];
+    } else if (isEmptyLocked) {
+      const lineClaim = { ...claimLineTemplate, data: dataClaimed };
+      combinDataSet = [lineClaim];
+    } else {
+      const lineLocked = { ...lockLineTemplate, data: dataLocked };
+      const lineClaim = { ...claimLineTemplate, data: dataClaimed };
+      combinDataSet = [lineClaim, lineLocked];
+    }
+
+    const newDataChart = { labels: _labels, datasets: combinDataSet };
     return newDataChart;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shedules.scheduleData]);
