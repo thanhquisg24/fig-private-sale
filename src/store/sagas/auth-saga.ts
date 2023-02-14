@@ -93,13 +93,16 @@ function* refreshTokenSaga(): Generator | any {
 
 function* initAuthTokenSaga(): Generator | any {
   try {
-    const jwt: IJwtEntity = yield presenter.auth.checkInitLocalStorageLogin();
-    const isExpired = isTokenExpired(jwt);
-    if (isExpired) {
-      notifyMessageError("Your Session has been expired!");
-    } else {
-      yield put(doLoginSuccess({ ...jwt, email: "" }));
-      yield spawn(timer, jwt.expiresIn);
+    const jwt: IJwtEntity | null = yield presenter.auth.checkInitLocalStorageLogin();
+    if (jwt !== null) {
+      const isExpired = isTokenExpired(jwt);
+      if (isExpired) {
+        presenter.auth.cleanAuthData();
+        notifyMessageError("Your Session has been expired!");
+      } else {
+        yield put(doLoginSuccess({ ...jwt, email: "" }));
+        yield spawn(timer, jwt.expiresIn);
+      }
     }
   } catch (error) {
     yield put(doLoginFailure(error.message));
@@ -123,4 +126,9 @@ function* logoutSagaWatcher() {
   yield takeLatest(doLogoutRequest.type, logoutSaga);
 }
 
-export const authWatchers = [loginSagaWatcher(), logoutSagaWatcher(), refreshTokenSagaWatcher(), initAuthTokenWatcher()];
+export const authWatchers = [
+  loginSagaWatcher(),
+  logoutSagaWatcher(),
+  refreshTokenSagaWatcher(),
+  initAuthTokenWatcher(),
+];

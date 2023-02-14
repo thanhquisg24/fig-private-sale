@@ -1,10 +1,11 @@
+import { emitRefreshData, notifyMessageError, notifyMessageSuccess } from "../../emiter/AppEmitter";
+
 import BtnSpinerSubmiting from "@components/offer-spinner-submit";
-import { useEthers } from "@usedapp/core";
 import React from "react";
-import { notifyMessageSuccess, notifyMessageError, emitRefreshData } from "../../emiter/AppEmitter";
+import { getInfoRequest } from "@store/actions/user-action";
 import { presenter } from "../../adapters/presenters/index";
 import { useAppDispatch } from "../../hooks/useReduxToolKit";
-import { getInfoRequest } from "@store/actions/user-action";
+import { useEthers } from "@usedapp/core";
 
 export default function ClaimBtn(props: { userId: number; avaiableAmount: number }) {
   const { userId, avaiableAmount } = props;
@@ -54,8 +55,12 @@ export default function ClaimBtn(props: { userId: number; avaiableAmount: number
   return submitState.isSubmitting ? (
     <BtnSpinerSubmiting text="Claiming..." className="w-100 mt-4" variant="primary" />
   ) : (
-    <button type="button" className="btn btn-primary w-100 mt-4" onClick={() => onHandleClaim()}>
-      Claim
-    </button>
+    <>
+      {avaiableAmount > 0 && (
+        <button type="button" className="btn btn-primary w-100 mt-4" onClick={() => onHandleClaim()}>
+          Claim
+        </button>
+      )}
+    </>
   );
 }

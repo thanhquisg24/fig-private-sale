@@ -39,7 +39,7 @@ export const options = {
 // const labels = ["", "Month 1", "Month 2", "Month 3", "Month 4", "Month 5"];
 
 const claimLineTemplate = {
-  label: "Claimed",
+  label: "Unlocked",
   data: [0, 2000, 4000, 6000, undefined, undefined],
   borderColor: "rgb(53, 162, 235)",
   backgroundColor: "rgba(53, 162, 235, 0.5)",

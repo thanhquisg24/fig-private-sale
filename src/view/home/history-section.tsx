@@ -1,11 +1,12 @@
+import { getTokenSymbolSelector, getUserIdSelector } from "@store/selector";
+
+import { FIG_CHAIN } from "../../config";
 import { IVestingHistoryEntity } from "@adapters/entity";
 import MoneyComponent from "@components/MoneyComponent";
-import { useVestingHistory } from "@hooks/useVestingHistory";
-import { getTokenSymbolSelector, getUserIdSelector } from "@store/selector";
-import { formatTxDate } from "@utils/date-format";
 import { formatShortTx } from "@utils/text-format";
-import { FIG_CHAIN } from "../../config";
+import { formatTxDate } from "@utils/date-format";
 import { useAppSelector } from "../../hooks/useReduxToolKit";
+import { useVestingHistory } from "@hooks/useVestingHistory";
 
 function HistoryTable(props: { data: IVestingHistoryEntity[]; tokenSymbol: string }) {
   const { data, tokenSymbol } = props;
@@ -15,7 +16,7 @@ function HistoryTable(props: { data: IVestingHistoryEntity[]; tokenSymbol: strin
         <tr>
           <th scope="col">Txn Hash</th>
           <th scope="col">Quantity</th>
-          <th scope="col">Form</th>
+          <th scope="col">From</th>
           <th scope="col">To</th>
           <th scope="col">Date</th>
         </tr>

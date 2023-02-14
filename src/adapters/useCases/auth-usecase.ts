@@ -11,7 +11,8 @@ export interface IAuthUseCase {
   postLogout(email: string): Promise<string>;
   postRefreshToken(refreshToken: string): Promise<IJwtEntity>;
   postCheckToken(token: string): Promise<boolean>;
-  checkInitLocalStorageLogin(): Promise<IJwtEntity>;
+  checkInitLocalStorageLogin(): Promise<IJwtEntity | null>;
+  cleanAuthData(): void;
 }
 export class AuthUseCase implements IAuthUseCase {
   readonly repository: IAuthRepository;
@@ -20,10 +21,15 @@ export class AuthUseCase implements IAuthUseCase {
     this.repository = sessionRepositories;
   }
 
-  checkInitLocalStorageLogin(): Promise<IJwtEntity> {
+  cleanAuthData(): void {
+    this.removeAuth();
+  }
+
+  checkInitLocalStorageLogin(): Promise<IJwtEntity | null> {
     const store = diInfrastructures.webStorage.getToken();
     if (store === null) {
-      return Promise.reject(new Error("Not found token in store!"));
+      return Promise.resolve(null);
+      // return Promise.reject(new Error("Not found token in store!"));
     }
     setAxiosHeaderAuth(store.access_token);
     return new Promise((resolve, reject) => {
@@ -56,7 +62,12 @@ export class AuthUseCase implements IAuthUseCase {
         .then((res: AxiosResponse<ILoginResponse>) => {
           if (res.status === 200) {
             const { resultData } = res.data;
-            const newJwt = this.storeAuth(resultData.access_token, resultData.refresh_token, resultData.email, resultData.userId);
+            const newJwt = this.storeAuth(
+              resultData.access_token,
+              resultData.refresh_token,
+              resultData.email,
+              resultData.userId,
+            );
             setAxiosHeaderAuth(resultData.access_token);
             resolve(newJwt);
           } else {
@@ -92,7 +103,12 @@ export class AuthUseCase implements IAuthUseCase {
         .then((res: AxiosResponse) => {
           if (res.status === 200) {
             const { resultData } = res.data;
-            const newJwt = diInfrastructures.webStorage.setToken(resultData.access_token, resultData.refresh_token, resultData.email, resultData.userId);
+            const newJwt = diInfrastructures.webStorage.setToken(
+              resultData.access_token,
+              resultData.refresh_token,
+              resultData.email,
+              resultData.userId,
+            );
             setAxiosHeaderAuth(resultData.accessToken);
             resolve(newJwt);
           }
