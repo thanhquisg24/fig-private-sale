@@ -1,6 +1,5 @@
 import { shortenIfAddress, useEthers } from "@usedapp/core";
 
-import { Button } from "react-bootstrap";
 import Identicon from "./Identicon";
 
 type Props = {
@@ -15,13 +14,13 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   }
 
   return account ? (
-    <Button className="btn-connect-wallet getstarted scrollto d-inline-flex" onClick={handleOpenModal}>
+    <button type="button" className="btn-connect-wallet getstarted scrollto d-inline-flex" onClick={handleOpenModal}>
       <Identicon />
       <span className="text-white mx-2">{shortenIfAddress(account)}</span>
-    </Button>
+    </button>
   ) : (
-    <Button onClick={() => handleConnectWallet()} className="btn-connect-wallet getstarted scrollto">
+    <button type="button" onClick={() => handleConnectWallet()} className="btn-connect-wallet getstarted scrollto">
       Connect to a wallet
-    </Button>
+    </button>
   );
 }
