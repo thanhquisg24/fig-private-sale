@@ -87,7 +87,9 @@ function* refreshTokenSaga(): Generator | any {
   } catch (error) {
     yield put(doRefreshTokenFailure(error.message));
     notifyMessageError("Refresh Token Fail!");
-    yield spawn(timer, JWT_TOKEN_EXPIREIN);
+    presenter.auth.cleanAuthData();
+    window.location.href = "/login";
+    // yield spawn(timer, JWT_TOKEN_EXPIREIN);
   }
 }
 
