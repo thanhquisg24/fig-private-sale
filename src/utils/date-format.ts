@@ -31,10 +31,10 @@ export function getDate(): Date {
 
 export function formatStandartDate(dateISO: string | Date) {
   const m = moment(dateISO);
-  return m.format("MMM-MM-YYYY");
+  return m.format("MMM-DD-YYYY");
 }
 
 export function formatTxDate(dateISO: string | Date) {
   const m = moment(dateISO);
-  return m.format("MMM-MM-YYYY HH:mm:ss A Z");
+  return m.format("MMM-DD-YYYY HH:mm:ss A Z");
 }
