@@ -1,6 +1,6 @@
 import { getTokenSymbolSelector, getUserIdSelector } from "@store/selector";
 
-import { FIG_CHAIN } from "../../config";
+import { NUMB_CHAIN } from "../../config";
 import { IVestingHistoryEntity } from "@adapters/entity";
 import MoneyComponent from "@components/MoneyComponent";
 import { formatShortTx } from "@utils/text-format";
@@ -25,7 +25,7 @@ function HistoryTable(props: { data: IVestingHistoryEntity[]; tokenSymbol: strin
         {data.map((item) => (
           <tr key={item.id}>
             <td>
-              <a href={FIG_CHAIN.getExplorerTransactionLink(item.txId)} target="_blank" rel="noreferrer">
+              <a href={NUMB_CHAIN.getExplorerTransactionLink(item.txId)} target="_blank" rel="noreferrer">
                 {formatShortTx(item.txId)}
               </a>
             </td>
@@ -33,12 +33,12 @@ function HistoryTable(props: { data: IVestingHistoryEntity[]; tokenSymbol: strin
               <MoneyComponent numValue={item.amount} /> {tokenSymbol}
             </td>
             <td>
-              <a href={FIG_CHAIN.getExplorerAddressLink(item.fromAddress)} target="_blank" rel="noreferrer">
+              <a href={NUMB_CHAIN.getExplorerAddressLink(item.fromAddress)} target="_blank" rel="noreferrer">
                 {formatShortTx(item.fromAddress)}
               </a>
             </td>
             <td>
-              <a href={FIG_CHAIN.getExplorerAddressLink(item.fromAddress)} target="_blank" rel="noreferrer">
+              <a href={NUMB_CHAIN.getExplorerAddressLink(item.fromAddress)} target="_blank" rel="noreferrer">
                 {formatShortTx(item.toAddress)}
               </a>
             </td>

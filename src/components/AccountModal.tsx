@@ -2,7 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import { shortenIfAddress, useEthers } from "@usedapp/core";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { FIG_CHAIN } from "../config";
+import { NUMB_CHAIN, NUMB_FAUCET_LINK } from "../config";
 import Identicon from "./Identicon";
 
 // import { formatUnits } from "ethers/lib/utils";
@@ -24,7 +24,14 @@ export default function AccountModal({ isOpen, onClose }: Props) {
   const viewExplorer = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (account) {
-      const url = FIG_CHAIN.getExplorerAddressLink(account);
+      const url = NUMB_CHAIN.getExplorerAddressLink(account);
+      window.open(url, "_blank");
+    }
+  };
+  const goFaucet = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (account) {
+      const url = NUMB_FAUCET_LINK;
       window.open(url, "_blank");
     }
   };
@@ -57,6 +64,9 @@ export default function AccountModal({ isOpen, onClose }: Props) {
           </CopyToClipboard>
           <Button variant="link" onClick={(e) => viewExplorer(e)}>
             <i className="fa-solid fa-arrow-up-right-from-square fa-lg"></i> View on Explorer
+          </Button>
+          <Button variant="link" onClick={(e) => goFaucet(e)}>
+            <i className="fa-solid fa-arrow-up-right-from-square fa-lg"></i> Faucet
           </Button>
         </div>
       </Modal.Body>

@@ -1,29 +1,32 @@
 import { Chain, Config, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
 
-export const FIG_CHAIN: Chain = {
-  chainId: 9999,
-  chainName: "FIG Chain",
+export const NUMB_FAUCET_LINK = "https://faucet-testnet.numblock.org/";
+export const BNB_FAUCET_LINK = "https://testnet.bnbchain.org/faucet-smart";
+
+export const NUMB_CHAIN: Chain = {
+  chainId: 100,
+  chainName: "NUMB Chain",
   isTestChain: true,
   isLocalChain: false,
-  multicallAddress: "0x989A8abf0393a63c29A5eA24e3Dc8278A95557D8",
-  getExplorerAddressLink: (address: string) => `https://agnek.figchain.org/address/${address}`,
-  getExplorerTransactionLink: (transactionHash: string) => `https://agnek.figchain.org/tx/${transactionHash}`,
+  multicallAddress: "0xd722174C25A980dA3c25Bd5780ADeA578dF5237A",
+  getExplorerAddressLink: (address: string) => `https://testnet.numblock.org/address/${address}`,
+  getExplorerTransactionLink: (transactionHash: string) => `https://testnet.numblock.org/tx/${transactionHash}`,
   // Optional parameters:
-  rpcUrl: "https://rpc-agnek.figchain.org",
-  blockExplorerUrl: "https://agnek.figchain.org",
+  rpcUrl: "https://rpc-testnet.numblock.org",
+  blockExplorerUrl: "https://testnet.numblock.org",
   nativeCurrency: {
-    name: "FIG",
-    symbol: "FIG",
+    name: "NUMB",
+    symbol: "NUMB",
     decimals: 18,
   },
 };
 
 const configCustomChain: Config = {
-  readOnlyChainId: FIG_CHAIN.chainId,
+  readOnlyChainId: NUMB_CHAIN.chainId,
   readOnlyUrls: {
-    [FIG_CHAIN.chainId]: "https://rpc-agnek.figchain.org",
+    [NUMB_CHAIN.chainId]: "https://rpc-testnet.numblock.org",
   },
-  networks: [...DEFAULT_SUPPORTED_CHAINS, FIG_CHAIN],
+  networks: [...DEFAULT_SUPPORTED_CHAINS, NUMB_CHAIN],
 };
 
 // IMPORTANT: Fill that object with your own data.

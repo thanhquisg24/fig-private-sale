@@ -41,8 +41,8 @@ export const options = {
 const claimLineTemplate = {
   label: "Unlocked",
   data: [0, 2000, 4000, 6000, undefined, undefined],
-  borderColor: "rgb(53, 162, 235)",
-  backgroundColor: "rgba(53, 162, 235, 0.5)",
+  borderColor: "rgba(36, 177, 150, 1)",
+  backgroundColor: "rgba(36, 177, 150, 0.5)",
   fill: false,
   stepped: true,
 };

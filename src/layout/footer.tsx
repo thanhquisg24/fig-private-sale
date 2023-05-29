@@ -104,14 +104,11 @@ export default function Footer() {
       </div> */}
       <div className="container">
         <div className="copyright">
-          © Copyright{" "}
+          Copyright © 2023{" "}
           <strong>
-            <span>Figchain</span>
+            <span>NumBlock</span>
           </strong>
-          . All Rights Reserved
-        </div>
-        <div className="credits">
-          Designed by <a href="https://docs.figchain.org/">Figchain</a>
+          . Foundation
         </div>
       </div>
     </footer>

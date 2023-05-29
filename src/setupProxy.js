@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const createProxyMiddleware = require("http-proxy-middleware");
 
-const host = "http://103.90.232.208:4444/";
+const host = "http://localhost:3100/";
 const controllers = ["/api"];
 
 const proxyAll = createProxyMiddleware("/", {

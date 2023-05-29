@@ -57,7 +57,7 @@ export default function ClaimBtn(props: { userId: number; avaiableAmount: number
   ) : (
     <>
       {avaiableAmount > 0 && (
-        <button type="button" className="btn btn-primary w-100 mt-4" onClick={() => onHandleClaim()}>
+        <button type="button" className="btn btn-claim w-100 mt-4" onClick={() => onHandleClaim()}>
           Claim
         </button>
       )}
